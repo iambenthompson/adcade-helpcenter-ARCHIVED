@@ -1,6 +1,12 @@
-*
+# Ignore everything in the root except the "wp-content" directory.
+/*
+!.gitignore
+!wp-content/
 
-!wp-content/themes/*
+# Ignore everything in the "wp-content" directory, except the "plugins"
+# and "themes" directories.
+wp-content/*
+!wp-content/themes/
 
 # large/disallowed file types
 # a CDN should be used for these
