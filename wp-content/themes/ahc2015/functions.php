@@ -44,7 +44,7 @@ function ahc2015_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary Menu', 'ahc2015' ),
+		'primary' => esc_html__( 'Help Center Menu', 'ahc2015' ),
 	) );
 
 	/*
