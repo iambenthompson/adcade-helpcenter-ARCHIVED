@@ -25,3 +25,8 @@ textarea {
 	padding-left: 3px;
 	width: 100%;
 }
+
+input[type="search"] {
+    -moz-box-sizing:content-box;
+    -webkit-box-sizing:content-box;
+}
