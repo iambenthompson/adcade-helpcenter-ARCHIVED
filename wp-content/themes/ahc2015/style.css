@@ -328,6 +328,10 @@ mark, ins {
 big {
   font-size: 125%; }
 
+/* line 47, sass/typography/_copy.scss */
+b, strong {
+  font-weight: 700; }
+
 /*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
@@ -356,10 +360,9 @@ blockquote, q {
 
 /* line 24, sass/elements/_elements.scss */
 hr {
-  background-color: #ccc;
-  border: 0;
-  height: 1px;
-  margin-bottom: 1.5em; }
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
 
 /* line 1, sass/elements/_lists.scss */
 ul, ol {
@@ -387,7 +390,7 @@ dt {
 dd {
   margin: 0 1.5em 1.5em; }
 
-/* line 33, sass/elements/_elements.scss */
+/* line 32, sass/elements/_elements.scss */
 img {
   height: auto;
   /* Make sure images are scaled correctly. */
@@ -436,6 +439,29 @@ input[type="submit"] {
     border-color: #aaa #bbb #bbb;
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15); }
 
+/* line 28, sass/forms/_buttons.scss */
+.search-form input[type="submit"].search-submit {
+  width: 20px;
+  height: 20px;
+  border: none;
+  vertical-align: bottom;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-image: url(images/search.svg); }
+
+/* line 38, sass/forms/_buttons.scss */
+.home #primary input[type="submit"].search-submit {
+  position: absolute;
+  left: 25px;
+  bottom: 21px; }
+
+/* line 44, sass/forms/_buttons.scss */
+#header-widget-bar input[type="submit"].search-submit {
+  display: block;
+  position: relative;
+  top: 15px;
+  left: 20px; }
+
 /* line 1, sass/forms/_fields.scss */
 input[type="text"],
 input[type="email"],
@@ -467,6 +493,129 @@ input[type="search"] {
 textarea {
   padding-left: 3px;
   width: 100%; }
+
+/* line 29, sass/forms/_fields.scss */
+input[type="search"] {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; }
+
+/* line 34, sass/forms/_fields.scss */
+.search-field {
+  height: 40px;
+  width: 340px;
+  margin-left: 15px;
+  padding-left: 15px;
+  text-align: left;
+  outline: none;
+  border: none;
+  background: none; }
+
+/* line 45, sass/forms/_fields.scss */
+.search-field::-webkit-input-placeholder {
+  color: #6d7d8c; }
+
+/* line 49, sass/forms/_fields.scss */
+.search-field:-moz-input-placeholder {
+  color: #6d7d8c; }
+
+/* line 53, sass/forms/_fields.scss */
+.search-field:-ms-input-placeholder {
+  color: #6d7d8c; }
+
+/* line 57, sass/forms/_fields.scss */
+.home #primary .search-field {
+  width: 515px;
+  height: 60px;
+  margin-left: 0;
+  padding-left: 57px;
+  color: #6d7d8c;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: .07em;
+  background: #fff;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: solid 1px #dfe2e6; }
+
+/* line 75, sass/forms/_fields.scss */
+#header-widget-bar .search-field {
+  display: block;
+  width: 300px;
+  height: 45px;
+  margin-left: 4px;
+  padding-left: 9px;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  color: #687888;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  outline: none;
+  border: none;
+  background: transparent; }
+
+/* line 94, sass/forms/_fields.scss */
+#header-widget-bar .search-field::-webkit-input-placeholder {
+  color: #687888; }
+
+/* line 98, sass/forms/_fields.scss */
+#header-widget-bar .search-field:-moz-input-placeholder {
+  color: #687888; }
+
+/* line 102, sass/forms/_fields.scss */
+#header-widget-bar .search-field:-ms-input-placeholder {
+  color: #687888; }
+
+/* line 5, sass/forms/_forms.scss */
+.search-form {
+  position: relative; }
+
+/* line 9, sass/forms/_forms.scss */
+.home-search {
+  padding: 40px 0;
+  margin-bottom: 15px;
+  text-align: center; }
+
+/* line 15, sass/forms/_forms.scss */
+.home-search:before, .home-search:after {
+  content: " ";
+  display: table; }
+
+/* line 20, sass/forms/_forms.scss */
+.home-search:after {
+  clear: both; }
+
+/* line 24, sass/forms/_forms.scss */
+.home-search .search-form {
+  width: 595px;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* line 30, sass/forms/_forms.scss */
+.home-search {
+  padding: 40px 0;
+  text-align: center; }
+
+/* line 35, sass/forms/_forms.scss */
+.home-search:before, .home-search:after {
+  content: " ";
+  display: table; }
+
+/* line 40, sass/forms/_forms.scss */
+.home-search:after {
+  clear: both; }
+
+/* line 44, sass/forms/_forms.scss */
+#header-widget-bar .search-form {
+  position: relative;
+  float: left;
+  width: 350px;
+  height: 45px;
+  margin: 10px 0 0 25px; }
 
 /*--------------------------------------------------------------
 # Navigation
@@ -825,5 +974,89 @@ object {
   position: relative;
   width: auto;
   height: 24px; }
+
+/* line 119, sass/style.scss */
+.site-header {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: 65px;
+  background: #fff;
+  font-family: "proxima-nova",sans-serif;
+  font-size: 13px;
+  letter-spacing: .06em;
+  font-weight: 400;
+  color: #687888; }
+
+/* line 133, sass/style.scss */
+.header-content {
+  display: block;
+  width: 1280px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* line 141, sass/style.scss */
+.site-branding {
+  display: block;
+  width: 120px;
+  height: 65px;
+  position: relative;
+  float: left;
+  z-index: 1;
+  background-image: url(images/adcade.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%; }
+
+/* line 154, sass/style.scss */
+html {
+  width: 100%;
+  min-height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 162, sass/style.scss */
+*, :before, :after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+/* line 168, sass/style.scss */
+body {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  color: #48505c;
+  font-family: "proxima-nova",sans-serif;
+  background: #f5f7fa; }
+
+@media screen and (max-width: 1300px) {
+  /* line 179, sass/style.scss */
+  .header-content {
+    width: 960px; }
+
+  /* line 183, sass/style.scss */
+  .site-branding, .site-branding .logo {
+    width: 100px; }
+
+  /* line 187, sass/style.scss */
+  #header-widget-bar .search-form {
+    width: 220px;
+    margin-left: 15px; }
+
+  /* line 192, sass/style.scss */
+  #header-widget-bar .search-form .search-field {
+    width: 220px;
+    padding-left: 2px;
+    font-size: 13px; }
+
+  /* line 198, sass/style.scss */
+  #header-widget-bar .search-form input[type="submit"].search-submit {
+    width: 15px;
+    height: 15px; } }
 
 /*# sourceMappingURL=style.css.map */
