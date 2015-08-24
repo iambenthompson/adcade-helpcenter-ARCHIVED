@@ -111,10 +111,10 @@ function ahc2015_widgets_init() {
 	// Header Widget Bar
 	register_sidebar( array(
 		'name'          => esc_html__( 'Header Widget Bar', 'ahc2015' ),
-		'id'            => 'header-widget-bar'//,
+		'id'            => 'header-widget-bar',
 		// 'description'   => '',
-		// 'before_widget' => '',
-		// 'after_widget'  => '',
+		'before_widget' => '',
+		'after_widget'  => ''
 		// 'before_title'  => '<h2 class="header-widget-title">',
 		// 'after_title'   => '</h2>',
 	) );
