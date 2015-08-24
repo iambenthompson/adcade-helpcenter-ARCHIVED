@@ -107,8 +107,26 @@ function ahc2015_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+
+	// Header Widget Bar
+	register_sidebar( array(
+		'name'          => esc_html__( 'Header Widget Bar', 'ahc2015' ),
+		'id'            => 'header-widget-bar'//,
+		// 'description'   => '',
+		// 'before_widget' => '',
+		// 'after_widget'  => '',
+		// 'before_title'  => '<h2 class="header-widget-title">',
+		// 'after_title'   => '</h2>',
+	) );
 }
 add_action( 'widgets_init', 'ahc2015_widgets_init' );
+
+add_shortcode('wordpress-search', 'get_search_form');
+
+add_filter( 'the_excerpt', 'shortcode_unautop');
+add_filter( 'the_excerpt', 'do_shortcode');
+add_filter('get_the_excerpt', 'shortcode_unautop');
+add_filter('get_the_excerpt', 'do_shortcode');
 
 /**
  * Enqueue scripts and styles.
