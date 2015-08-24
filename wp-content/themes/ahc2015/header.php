@@ -25,24 +25,24 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'ahc2015' ); ?></a>
 
 	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<a href="http://www.adcade.com" rel="author"><img src="<?php bloginfo('template_directory'); ?>/images/adcade-logo.png" alt="Adcade.com" width="120" height="21" /></a>
-		</div><!-- .site-branding -->
-		
-		<?php 
-		if (! ( is_front_page() || is_home() )) :
-		?>
-			<div id="header-widget-bar" class="" role="complementary">
-	   			<?php dynamic_sidebar( 'header-widget-bar' ); ?>
-			</div><!-- #header-widget-bar -->
-		<?php
-		endif;
-		?>
+		<div class="header-content">
+			<a href="http://www.adcade.com" class="site-branding" rel="author"></a>
+			
+			<?php 
+			if (! ( is_front_page() || is_home() )) :
+			?>
+				<div id="header-widget-bar" class="" role="complementary">
+		   			<?php dynamic_sidebar( 'header-widget-bar' ); ?>
+				</div><!-- #header-widget-bar -->
+			<?php
+			endif;
+			?>
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Help Center Menu', 'ahc2015' ); ?></button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav><!-- #site-navigation -->
+			<nav id="site-navigation" class="main-navigation" role="navigation">
+				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Help Center Menu', 'ahc2015' ); ?></button>
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+			</nav><!-- #site-navigation -->
+		</div>
 	</header><!-- #masthead -->
 	
 	<?php 
