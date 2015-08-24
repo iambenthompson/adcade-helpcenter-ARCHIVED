@@ -44,5 +44,11 @@
 			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
+	
+	<?php 
+	if (! ( is_front_page() || is_home() )) :
+		if ( function_exists('yoast_breadcrumb') ) {yoast_breadcrumb('<p id="breadcrumbs">','</p>');};
+	endif; 
+	?>
 
 	<div id="content" class="site-content">
