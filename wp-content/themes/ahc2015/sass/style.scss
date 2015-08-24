@@ -105,3 +105,13 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 # Media
 --------------------------------------------------------------*/
 @import "media/media";
+
+
+/*--------------------------------------------------------------
+# In Development
+--------------------------------------------------------------*/
+.footer-icons .icon {
+	position: relative;
+	width: auto;
+	height: 24px;
+}

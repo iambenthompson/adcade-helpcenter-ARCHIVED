@@ -14,11 +14,22 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'ahc2015' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'ahc2015' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'ahc2015' ), 'ahc2015', '<a href="http://www.adcade.com" rel="designer">Adcade</a>' ); ?>
-		</div><!-- .site-info -->
+		<div class="footer-icons centered-icons">
+			<a href="https://www.adcade.com/" target="_blank" class="brand"></a>
+			<a href="https://www.linkedin.com/company/adcade" target="_blank" class="link">
+				<img src="<?php bloginfo('template_directory'); ?>/images/social/linkedin.svg" class="icon">
+			</a>
+			<a href="https://twitter.com/adcade" target="_blank" class="link">
+				<img src="<?php bloginfo('template_directory'); ?>/images/social/twitter.svg" class="icon">
+			</a>
+			<a href="https://www.facebook.com/adcadenyc" target="_blank" class="link">
+				<img src="<?php bloginfo('template_directory'); ?>/images/social/facebook.svg" class="icon">
+			</a>
+			<a href="https://plus.google.com/+Adcade/videos" target="_blank" class="link">
+				<img src="<?php bloginfo('template_directory'); ?>/images/social/google.svg" class="icon">
+			</a>
+		</div>
+		<p class="copyright">© 2015 Adcade. All Rights Reserved.</p>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
