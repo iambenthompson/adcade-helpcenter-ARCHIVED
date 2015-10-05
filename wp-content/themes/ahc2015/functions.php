@@ -129,6 +129,224 @@ add_filter('get_the_excerpt', 'shortcode_unautop');
 add_filter('get_the_excerpt', 'do_shortcode');
 
 /**
+ * Get post excerpt by post ID.
+ *
+ * @return string
+ */
+function get_post_excerpt_by_id( $post_id ) {
+    global $post;
+    $post = get_post( $post_id );
+    setup_postdata( $post );
+    $the_excerpt = get_the_excerpt();
+    wp_reset_postdata();
+    return $the_excerpt;
+}
+
+//Ensure that Excerpt edit box is shown for all types that support it 
+function show_hidden_meta_boxes($hidden, $screen) {
+    if ( 'post' == $screen->base ) {
+        foreach($hidden as $key=>$value) {
+            if ('postexcerpt' == $value) {
+                unset($hidden[$key]);
+                break;
+            }
+        }
+    }
+ 
+    return $hidden;
+}
+add_filter('default_hidden_meta_boxes', 'show_hidden_meta_boxes', 10, 2);
+
+// Makes the recommended properties selection when editing Classes display the parent of each property in the list.
+// ACF Recommended Properties relationship list extension
+function recommended_properties_relationship_result( $result, $object, $field, $post ) {
+    //$object is the line item post being returned, its "parent" is the immediate ancestor in WP-Types
+
+    $parent_post_id = wpcf_pr_post_get_belongs($object->ID,'adscript-api');
+    
+    $parent_title = empty( $parent_post_id ) ? "NO PARENT" : get_the_title( $parent_post_id );
+
+    $result .= ' [' . $parent_title .  ']';
+
+    return $result;
+
+}
+add_filter('acf/fields/relationship/result/name=recommended_properties', 'recommended_properties_relationship_result', 10, 4);
+
+/* TOTALLY BROKEN WIP FOR FILTERING OUT N/A PROPERTIES IN RECOMMENDED PROPERTIES FIELD
+function relationship_options_filter($args, $field, $post) {
+    
+    get_ancestors($post->ID, 'page');
+
+    $args['post__in'] = array('publish');
+    
+    return $args;
+}
+add_filter('acf/fields/relationship/query/name=recommended_properties', 'relationship_options_filter', 10, 3);
+*/
+
+//Returns all properties that a Class post has access to through its ownership and ancestry
+function ahc2015_all_properties ( $post_id ){   
+    return ahc2015_accessible_properties( $post_id, true );
+}
+
+//Returns all properties that a Class post directly owns
+function ahc2015_original_properties ( $post_id ){
+    $meta_query = array(array('key' => '_wpcf_belongs_adscript-api_id', 'value' => $post_id));
+
+    return get_posts(array(
+        'post_type' => 'property',
+        'numberposts' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'meta_query' => $meta_query
+    ));
+}
+
+//Returns all properties that a Class post has access to through its ancestry and optionally ownership
+function ahc2015_accessible_properties ( $post_id, $include_myself = false ){
+    $ancestor_ids = get_ancestors($post_id, 'page');
+
+    $meta_query = array(
+        'relation' => 'OR'
+    );
+    
+    foreach ($ancestor_ids as $ancestor_id) {
+        $meta_query[] = array(
+            'key' => '_wpcf_belongs_adscript-api_id',
+            'value' => $ancestor_id 
+            );
+    }
+
+    if ($include_myself){
+        $meta_query[] = array(
+            'key' => '_wpcf_belongs_adscript-api_id',
+            'value' => $post_id 
+            );
+    }   
+
+    return get_posts(array(
+        'post_type' => 'property',
+        'numberposts' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'meta_query' => $meta_query
+    ));
+}
+
+//Returns all methods that a Class post has access to through its ownership and ancestry
+function ahc2015_all_methods ( $post_id ){  
+    return ahc2015_accessible_methods( $post_id, true );
+}
+
+//Returns all methods that a Class post directly owns
+function ahc2015_original_methods ( $post_id ){
+    $meta_query = array(array('key' => '_wpcf_belongs_adscript-api_id', 'value' => $post_id));
+
+    return get_posts(array(
+        'post_type' => 'method',
+        'numberposts' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'meta_query' => $meta_query
+    ));
+}
+
+//Returns all methods that a Class post has access to through its ancestry and optionally ownership
+function ahc2015_accessible_methods ( $post_id, $include_myself = false ){
+    $ancestor_ids = get_ancestors($post_id, 'page');
+
+    $meta_query = array(
+        'relation' => 'OR'
+    );
+    
+    foreach ($ancestor_ids as $ancestor_id) {
+        $meta_query[] = array(
+            'key' => '_wpcf_belongs_adscript-api_id',
+            'value' => $ancestor_id 
+            );
+    }
+
+    if ($include_myself){
+        $meta_query[] = array(
+            'key' => '_wpcf_belongs_adscript-api_id',
+            'value' => $post_id 
+            );
+    }   
+
+    return get_posts(array(
+        'post_type' => 'method',
+        'numberposts' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'meta_query' => $meta_query
+    ));
+}
+
+//Returns all parameters that a Method post owns, ordered by their menu_order number
+function ahc2015_method_params ( $post_id ){
+    $meta_query = array(array('key' => '_wpcf_belongs_method_id', 'value' => $post_id));
+
+    return get_posts(array(
+        'post_type' => 'parameter',
+        'numberposts' => -1,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'meta_query' => $meta_query
+    ));
+}
+
+//Returns all parameter keys that a Parameter post owns, ordered alphabetically by title
+function ahc2015_method_param_keys ( $post_id ){
+    $meta_query = array(array('key' => '_wpcf_belongs_parameter_id', 'value' => $post_id));
+
+    return get_posts(array(
+        'post_type' => 'parameter-key',
+        'numberposts' => -1,
+        'orderby' => 'title',
+        'order' => 'ASC',
+        'meta_query' => $meta_query
+    ));
+}
+
+//Returns AdScript default value, when no value has been defined, based on passed type of variable
+function ahc2015_default_empty_value($type){
+    // Types:
+    // object = undefined
+    // integer = 0
+    // number = 0
+    // string = ""
+    // boolean = false
+    // array = undefined
+    // function = undefined
+    // adscript = undefined
+    $value = "undefined";
+    switch ($type){
+        case "integer" :
+        case "number" :
+            $value = "0";
+            break;
+        case "string" :
+            $value = '""';
+            break;
+    }
+
+    return $value;
+}
+
+//Returns an AdScript link as an HTML anchor tag with link text based on a few passed params
+function ahc2015_adscript_link_html ( $post_id, $text = "", $anchor = "", $extra_classes = "" ){
+    $adscript_post = get_post( $post_id );
+    if (!empty($anchor)) 
+        $anchor = "#" . $anchor;
+    if (empty($text))
+        $text = $adscript_post->post_title;
+    if (!empty($extra_classes))
+        $extra_classes = " " . $extra_classes;
+    return '<a href="' . post_permalink($post_id) . $anchor . '" class="adscript-link' . $extra_classes . '">' . $text . '</a>';
+}
+
+/**
  * Enqueue scripts and styles.
  */
 function ahc2015_scripts() {
