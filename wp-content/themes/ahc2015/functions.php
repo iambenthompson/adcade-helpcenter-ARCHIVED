@@ -121,6 +121,7 @@ function ahc2015_widgets_init() {
 }
 add_action( 'widgets_init', 'ahc2015_widgets_init' );
 
+//Add shortcode to get search form
 add_shortcode('wordpress-search', 'get_search_form');
 
 add_filter( 'the_excerpt', 'shortcode_unautop');
