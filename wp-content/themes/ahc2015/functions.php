@@ -175,6 +175,46 @@ add_filter( 'get_the_archive_title', function ( $title ) {
     return $title;
 });
 
+//Augments permalinks for API parts that should link to one of their ancestors instead of themselves
+function augment_post_type_permalink($url, $post){
+    $augmented_url = $url;
+    switch (get_post_type($post)){
+        case 'property':
+            $adscript_post_ids = get_post_meta($post->ID, "_wpcf_belongs_adscript-api_id");
+            if (empty($adscript_post_ids)) break;
+            $adscript_post = get_post( $adscript_post_ids[0] );
+            $anchor = "#" . $post->post_title;
+            $augmented_url = post_permalink($adscript_post) . $anchor;
+            break;
+        case 'method':
+            $adscript_post_ids = get_post_meta($post->ID, "_wpcf_belongs_adscript-api_id");
+            if (empty($adscript_post_ids)) break;
+            $adscript_post = get_post( $adscript_post_ids[0] );
+            $anchor = "#" . $post->post_title . "()";
+            $augmented_url = post_permalink($adscript_post) . $anchor;
+            break;
+        case 'parameter':
+            $method_post_ids = get_post_meta($post->ID, "_wpcf_belongs_method_id");
+            if (empty($method_post_ids)) break;
+            $method_post = get_post($method_post_ids[0]);
+            $adscript_post = get_post( get_post_meta($method_post->ID, "_wpcf_belongs_adscript-api_id")[0] );
+            $anchor = "#" . $method_post->post_title . "()";
+            $augmented_url = post_permalink($adscript_post) . $anchor;
+            break;
+        case 'parameter-key':
+            $parameter_post_ids = get_post_meta($post->ID, "_wpcf_belongs_parameter_id");
+            if (empty($parameter_post_ids)) break;
+            $parameter_post_id = $parameter_post_ids[0];
+            $method_post = get_post(get_post_meta($parameter_post_id, "_wpcf_belongs_method_id")[0]);
+            $adscript_post = get_post( get_post_meta($method_post->ID, "_wpcf_belongs_adscript-api_id")[0] );
+            $anchor = "#" . $method_post->post_title . "()";
+            $augmented_url = post_permalink($adscript_post) . $anchor;
+            break;
+    }
+    return $augmented_url;
+}
+add_filter( 'post_type_link', 'augment_post_type_permalink', 10, 2);
+
 /**
  * Get post excerpt by post ID.
  *
