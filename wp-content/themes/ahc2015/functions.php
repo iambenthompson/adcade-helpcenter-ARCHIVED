@@ -215,6 +215,25 @@ function augment_post_type_permalink($url, $post){
 }
 add_filter( 'post_type_link', 'augment_post_type_permalink', 10, 2);
 
+//Keeps custom post types Parameter, Parameter Key, and Content Snippet out of the Add A Link UI List so that its easier to link to actual pages + anchors.
+function custom_wp_link_query_args($query)
+{
+    $pt_new = array();
+ 
+    $exclude_types = array('parameter', 'parameter-key', 'content-snippet'); // our list of custom post types to exclude from the query
+ 
+    foreach ($query['post_type'] as $pt)
+    {
+        if (in_array($pt, $exclude_types)) continue; // skip anything found in our exclude list
+        $pt_new[] = $pt; // add anything else back to the list
+    }
+ 
+    $query['post_type'] = $pt_new; // replace the list with our new one
+ 
+    return $query; // don't forget to return the $query array
+}
+add_filter('wp_link_query_args', 'custom_wp_link_query_args');
+
 /**
  * Get post excerpt by post ID.
  *
