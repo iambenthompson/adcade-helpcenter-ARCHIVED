@@ -121,6 +121,16 @@ function ahc2015_widgets_init() {
 }
 add_action( 'widgets_init', 'ahc2015_widgets_init' );
 
+//Alphabetize AdScript API posts by Title
+function ahc2015_adscript_api_modify_query( $query ) {
+	if ( is_post_type_archive('adscript-api') && $query->is_main_query() ) {
+	    set_query_var( 'posts_per_page', -1 );
+	    set_query_var( 'orderby', 'title' );
+	    set_query_var( 'order', 'ASC' ); 
+	}
+}
+add_action( "pre_get_posts", "ahc2015_adscript_api_modify_query" );
+
 //Add shortcode to get search form
 add_shortcode('wordpress-search', 'get_search_form');
 
@@ -132,6 +142,14 @@ add_filter( 'the_excerpt', 'shortcode_unautop');
 add_filter( 'the_excerpt', 'do_shortcode');
 add_filter('get_the_excerpt', 'shortcode_unautop');
 add_filter('get_the_excerpt', 'do_shortcode');
+
+//Changes default behavior of Archive title for custom post types, removes "Archives: " from the title
+add_filter( 'get_the_archive_title', function ( $title ) {
+    if( is_post_type_archive() ) {
+        $title = post_type_archive_title( '', false );
+    }
+    return $title;
+});
 
 /**
  * Get post excerpt by post ID.
