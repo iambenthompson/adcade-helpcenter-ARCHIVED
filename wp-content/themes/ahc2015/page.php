@@ -27,9 +27,8 @@ get_header(); ?>
 						comments_template();
 					endif;
 				?>
-
 			<?php endwhile; // End of the loop. ?>
-
+			<?php echo ahc2015_page_feedback_voting(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 

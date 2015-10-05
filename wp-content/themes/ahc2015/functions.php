@@ -452,6 +452,17 @@ function ahc2015_adscript_link_html ( $post_id, $text = "", $anchor = "", $extra
     return '<a href="' . post_permalink($post_id) . $anchor . '" class="adscript-link' . $extra_classes . '">' . $text . '</a>';
 }
 
+//Returns HTML for our Page Feedback voting UI element.
+function ahc2015_page_feedback_voting(){
+    ob_start();
+    ?>
+    <div class="page-feedback-voting">
+        <p>Was this helpful? <button class="positive" onclick="__gaTracker('send', 'event', 'Page Feedback', 'Vote', 'Positive', 1);">Yes</button> <button class="negative" onclick="__gaTracker('send', 'event', 'Page Feedback', 'Vote', 'Negative', -1);">No</button></p>
+    </div>
+    <?php 
+    return ob_get_clean();
+}
+
 /**
  * Enqueue scripts and styles.
  */
