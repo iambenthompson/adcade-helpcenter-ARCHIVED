@@ -124,6 +124,10 @@ add_action( 'widgets_init', 'ahc2015_widgets_init' );
 //Add shortcode to get search form
 add_shortcode('wordpress-search', 'get_search_form');
 
+//Do shortcodes in widget text
+add_filter('widget_text', 'do_shortcode');
+
+//Do shortcodes in excerpts without auto-paragraphing
 add_filter( 'the_excerpt', 'shortcode_unautop');
 add_filter( 'the_excerpt', 'do_shortcode');
 add_filter('get_the_excerpt', 'shortcode_unautop');
