@@ -131,6 +131,30 @@ function ahc2015_adscript_api_modify_query( $query ) {
 }
 add_action( "pre_get_posts", "ahc2015_adscript_api_modify_query" );
 
+// Adding "Member of" columnm to Property and Method page management in Admin
+function ahc2015_method_and_property_columns( $columns ) {
+
+	$pos = 2;//array_search("date", array_keys($columns));
+    $columns = array_merge(
+        array_slice($columns, 0, $pos),
+        array('member_of' => 'Member Of'),
+        array_slice($columns, $pos)
+    );
+
+	return $columns;
+}
+add_filter( 'manage_edit-property_columns', 'ahc2015_method_and_property_columns' ) ;
+add_filter( 'manage_edit-method_columns', 'ahc2015_method_and_property_columns' ) ;
+function ahc2015_columns_content_only_methods_and_properties($column_name, $post_ID) {
+    if ($column_name == 'member_of') {
+    	$member_of_post_id = get_post_meta($post_ID, "_wpcf_belongs_adscript-api_id")[0];
+    	$member_of_post_title = get_the_title( $member_of_post_id );
+        echo '<a class="row-member_of" href="' . get_edit_post_link($member_of_post_id) . '" title="Edit “' . $member_of_post_title . '”">' . $member_of_post_title . '</a>';
+    }
+}
+add_action('manage_property_posts_custom_column', 'ahc2015_columns_content_only_methods_and_properties', 10, 2);
+add_action('manage_method_posts_custom_column', 'ahc2015_columns_content_only_methods_and_properties', 10, 2);
+
 //Add shortcode to get search form
 add_shortcode('wordpress-search', 'get_search_form');
 
