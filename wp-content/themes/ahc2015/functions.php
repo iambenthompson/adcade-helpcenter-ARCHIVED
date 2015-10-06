@@ -473,6 +473,8 @@ function ahc2015_scripts() {
 
     wp_enqueue_script( 'ahc2015-adscript-api', get_template_directory_uri() . '/js/adscript-api.js', array(), '20150908', true );
 
+    wp_enqueue_script( 'ahc2015-url-plus-hash-tracking', get_template_directory_uri() . '/js/url-plus-hash-tracking.js', array(), '20150911', true );
+
 	wp_enqueue_script( 'ahc2015-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
