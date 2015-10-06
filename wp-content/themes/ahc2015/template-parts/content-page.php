@@ -18,6 +18,14 @@
 	<?php endif; ?>
 
 	<div class="entry-content">
+		<?php 
+			$featured_video_url = get_field('featured_video_url');
+			if (!empty($featured_video_url))
+			{?>
+				<div class="featured-video-container"><?php 
+				echo do_shortcode('[fve]' . $featured_video_url . '[/fve]');
+				?></div>
+			<?php }?>
 		<?php the_content(); ?>
 		<?php
 			wp_link_pages( array(
