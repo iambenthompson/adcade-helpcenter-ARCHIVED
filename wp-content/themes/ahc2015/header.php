@@ -26,7 +26,7 @@
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-content">
-			<a href="http://www.adcade.com" class="site-branding" rel="author"></a>
+			<a href="http://help-center.adcade.com" rel="author"><span class="site-branding"></span><span class="site-branding-divider">|</span><span class="site-branding-text">Help</span></a>
 			
 			<?php 
 			if (! ( is_front_page() || is_home() )) :
@@ -45,10 +45,11 @@
 		</div>
 	</header><!-- #masthead -->
 	
+	<div id="content" class="site-content">
+
 	<?php 
 	if (! ( is_front_page() || is_home() )) :
 		if ( function_exists('yoast_breadcrumb') ) {yoast_breadcrumb('<p id="breadcrumbs">','</p>');};
 	endif; 
 	?>
 
-	<div id="content" class="site-content">
