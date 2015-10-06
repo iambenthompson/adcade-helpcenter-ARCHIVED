@@ -59,10 +59,6 @@ get_header(); ?>
 							
 							$others[] = $post;
 					}
-					//echo ($first ? "" : ", ") . ahc2015_adscript_link_html(get_the_ID());
-					//get_template_part( 'template-parts/content-adscript-api', get_post_format() );
-					//echo get_post_format();
-					//$first = false;
 			endwhile; 
 			?>
 			<h2>Class List</h2>
