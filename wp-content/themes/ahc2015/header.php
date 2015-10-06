@@ -46,10 +46,11 @@ if ( $domain == "help.adcade.com" )  {
 			endif;
 			?>
 
-			<nav id="site-navigation" class="main-navigation" role="navigation">
-				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Help Center Menu', 'ahc2015' ); ?></button>
-				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-			</nav><!-- #site-navigation -->
+<!--			<nav id="site-navigation" class="main-navigation" role="navigation"> -->
+<!--				<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php //esc_html_e( 'Help Center Menu', 'ahc2015' ); ?></button> -->
+				<a href="" id="nav-button" class="menu-buttons closed"><img src="<?php bloginfo('template_directory'); ?>/images/menu.svg" id="nav-open-button" class="open-button"><img src="<?php bloginfo('template_directory'); ?>/images/close.svg" id="nav-close-button" class="close-button"></a>
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu', 'container_class' => 'menu-site-nav-container closed-nav', 'link_before' => '<span class="center">', 'link_after' => '</span>' ) ); ?>
+<!-- 			</nav>--><!-- #site-navigation -->
 		</div>
 	</header><!-- #masthead -->
 	

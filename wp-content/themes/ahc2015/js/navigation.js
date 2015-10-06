@@ -5,6 +5,38 @@
  * support for dropdown menus.
  */
 ( function() {
+	var Menu=function(menuId,wrapperSelector,wrapperClass){
+		var menu,
+			menuEl=document.querySelector(menuId);
+
+		if(menuEl){
+			var children=menuEl.children,
+				wrapper=document.querySelector(wrapperSelector);
+
+			if(children.length>1&&wrapper){
+				var open=children[0],
+					close=children[1];
+
+				menuEl.onclick=function(e){
+					e.preventDefault(),
+					menu.wrapper.classList.toggle(wrapperClass),
+					menu.menu.classList.toggle("closed"),
+					menu.closed=!menu.closed
+				},
+				menu={closed:!0,open:open,close:close,menu:menuEl,wrapper:wrapper}
+			}
+		}
+		return menu
+	};
+
+	window.addEventListener("DOMContentLoaded",
+		function(){
+			new Menu("#nav-button",".menu-site-nav-container","closed-nav")
+			//new Menu("#sidebar-nav-button","#sidebar","expanded")
+		},!1)
+
+	//BELOW WAS INCLUDED IN THEME..  ABOVE WAS MIGRATED FROM V1 HC
+	/*
 	var container, button, menu, links, subMenus;
 
 	container = document.getElementById( 'site-navigation' );
@@ -56,10 +88,11 @@
 		links[i].addEventListener( 'focus', toggleFocus, true );
 		links[i].addEventListener( 'blur', toggleFocus, true );
 	}
-
+	*/
 	/**
 	 * Sets or removes .focus class on an element.
 	 */
+	 /*
 	function toggleFocus() {
 		var self = this;
 
@@ -77,5 +110,5 @@
 
 			self = self.parentElement;
 		}
-	}
+	}*/
 } )();
