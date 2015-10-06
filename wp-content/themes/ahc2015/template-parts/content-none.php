@@ -10,8 +10,18 @@
 ?>
 
 <section class="no-results not-found">
-	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'ahc2015' ); ?></h1>
+	<header class="page-header"><?php 
+		$custom_title = "";
+		if (is_search())
+		{
+			$nothing_found_snippet_id = 497;
+			$nothing_found_snippet = get_post($nothing_found_snippet_id);
+			$custom_title = get_field('custom_title', $nothing_found_snippet_id);
+			global $post;
+			$post = $nothing_found_snippet;
+			setup_postdata($post);
+		}?>
+		<h1 class="page-title"><?php if(empty($custom_title)) esc_html_e( 'Nothing Found', 'ahc2015' ); else echo $custom_title; ?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
@@ -21,8 +31,9 @@
 
 		<?php elseif ( is_search() ) : ?>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'ahc2015' ); ?></p>
-			<?php get_search_form(); ?>
+			<?php echo apply_filters('the_content', $post->post_content); ?>
+			<?php //get_search_form(); ?>
+			<?php wp_reset_postdata(); ?>
 
 		<?php else : ?>
 
