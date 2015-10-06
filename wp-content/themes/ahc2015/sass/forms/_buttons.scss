@@ -32,10 +32,11 @@ input[type="submit"] {
     vertical-align:bottom;
     background-repeat:no-repeat;
     background-color:transparent;
-    background-image:url(images/search.svg)
+    background-image:url(images/search.svg);
+    box-shadow: none;
 }
 
-.home #primary input[type="submit"].search-submit {
+.home-search input[type="submit"].search-submit {
     position:absolute;
     left:25px;
     bottom:21px

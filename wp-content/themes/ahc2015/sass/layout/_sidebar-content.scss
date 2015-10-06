@@ -1,20 +1,20 @@
-.content-area {
+.page-template-default .content-area {
 	float: right;
 	margin: 0 0 0 (-$size__site-sidebar);
 	width: $size__site-main;
 }
 
-.site-main {
+.page-template-default .site-main {
 	margin: 0 0 0 $size__site-sidebar;
 }
 
-.site-content .widget-area {
+.page-template-default .site-content .widget-area {
 	float: left;
 	overflow: hidden;
 	width: $size__site-sidebar;
 }
 
-.site-footer {
+.page-template-default .site-footer {
 	clear: both;
 	width: $size__site-main;
 }

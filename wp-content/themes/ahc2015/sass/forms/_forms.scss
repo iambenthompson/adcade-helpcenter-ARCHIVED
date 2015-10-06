@@ -7,7 +7,7 @@
 }
 
 .home-search {
-    padding:40px 0;
+    padding:20px 0;
     margin-bottom:15px;
     text-align:center
 }
@@ -22,29 +22,15 @@
 }
 
 .home-search .search-form {
-    width:595px;
+    width:895px;
     margin-left:auto;
     margin-right:auto
-}
-
-.home-search {
-    padding:40px 0;
-    text-align:center
-}
-
-.home-search:before,.home-search:after {
-    content:" ";
-    display:table
-}
-
-.home-search:after {
-    clear:both
 }
 
 #header-widget-bar .search-form {
     position:relative;
     float:left;
-    width:350px;
+    width:280px;
     height:45px;
     margin:10px 0 0 25px
 }
