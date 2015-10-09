@@ -457,7 +457,7 @@ function ahc2015_page_feedback_voting(){
     ob_start();
     ?>
     <div class="page-feedback-voting">
-        <p>Was this helpful? <button class="positive" onclick="__gaTracker('send', 'event', 'Page Feedback', 'Vote', 'Positive', 1);">Yes</button> <button class="negative" onclick="__gaTracker('send', 'event', 'Page Feedback', 'Vote', 'Negative', -1);">No</button></p>
+        <p>Was this helpful? <button class="positive">Yes</button> <button class="negative">No</button></p>
     </div>
     <?php 
     return ob_get_clean();
@@ -474,6 +474,8 @@ function ahc2015_scripts() {
     wp_enqueue_script( 'ahc2015-adscript-api', get_template_directory_uri() . '/js/adscript-api.js', array(), '20150908', true );
 
     wp_enqueue_script( 'ahc2015-url-plus-hash-tracking', get_template_directory_uri() . '/js/url-plus-hash-tracking.js', array(), '20150911', true );
+
+    wp_enqueue_script( 'ahc2015-feedback', get_template_directory_uri() . '/js/feedback.js', array(), '20151009', true );
 
 	wp_enqueue_script( 'ahc2015-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
