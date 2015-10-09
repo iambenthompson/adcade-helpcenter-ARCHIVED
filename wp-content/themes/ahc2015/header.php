@@ -34,7 +34,7 @@ if ( $domain == "help.adcade.com" )  {
 
 	<header id="masthead" class="site-header" role="banner">
 		<div class="header-content">
-			<a href="http://help-center.adcade.com" rel="author"><span class="site-branding"></span><span class="site-branding-divider">|</span><span class="site-branding-text">Help</span></a>
+			<a href="<?php echo home_url(); ?>" rel="author"><span class="site-branding"></span><span class="site-branding-divider">|</span><span class="site-branding-text">Help</span></a>
 			
 			<?php 
 			if (! ( is_front_page() || is_home() )) :
