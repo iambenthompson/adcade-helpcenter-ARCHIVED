@@ -10,13 +10,14 @@
  */
 
 //REMOVE THIS AT LAUNCH
+/*
 $domain = $_SERVER["SERVER_NAME"];
 if ( $domain == "help.adcade.com" )  { 
 	// 307 Temporary Redirect
 	header("Location: http://help-v1.adcade.com",TRUE,307);
 	exit();
 }
-
+*/
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
