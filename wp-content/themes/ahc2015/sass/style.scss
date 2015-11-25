@@ -458,14 +458,25 @@ ul.toc_widget_list {
 }
 
 
+.page-template-adcade-topic-w-thumbs .featured-video-container,
 .page-template-adcade-topic .featured-video-container{
 	width: 35%;
 	float: left;
 	margin-right: 1.5em;
 }
 
+.page-template-adcade-topic-w-thumbs .featured-video-container + h2,
 .page-template-adcade-topic .featured-video-container + h2 {
 	clear: none;
+}
+
+.page-template-adcade-topic-w-thumbs .cc-child-pages-thumb {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 6px;
+  margin-right: 12px;
+  clear: both;
 }
 
 .page-template-adcade-home h3.ccpage_linked_title {
